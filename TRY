@@ -1,0 +1,64 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class TaskManager {
+    private ArrayList<String> tasks = new ArrayList<>();
+
+    public void addTask(String task) {
+        tasks.add(task);
+        System.out.println("Tarea agregada: " + task);
+    }
+
+    public void removeTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            System.out.println("Tarea eliminada: " + tasks.remove(index));
+        } else {
+            System.out.println("Índice inválido");
+        }
+    }
+
+    public void showTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("No hay tareas.");
+        } else {
+            System.out.println("Lista de tareas:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + ". " + tasks.get(i));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TaskManager manager = new TaskManager();
+        
+        while (true) {
+            System.out.println("\n1. Agregar tarea\n2. Eliminar tarea\n3. Mostrar tareas\n4. Salir");
+            System.out.print("Selecciona una opción: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea
+            
+            switch (option) {
+                case 1:
+                    System.out.print("Ingresa la tarea: ");
+                    String task = scanner.nextLine();
+                    manager.addTask(task);
+                    break;
+                case 2:
+                    System.out.print("Ingresa el número de la tarea a eliminar: ");
+                    int index = scanner.nextInt();
+                    manager.removeTask(index);
+                    break;
+                case 3:
+                    manager.showTasks();
+                    break;
+                case 4:
+                    System.out.println("Saliendo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opción no válida");
+            }
+        }
+    }
+}
